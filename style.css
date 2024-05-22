@@ -112,10 +112,28 @@ header h1 {
 }
 
 #user-score,
-#comp-score {
+#comp-score,
+#draw-score {
   font-size: 70px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 500;
+}
+
+#reset-btn {
+  height: 50px;
+  width: 120px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  background-color: #15cdd0;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+#reset-btn:hover {
+  background-color: #07a0a2;
+  cursor: pointer;
+  color: white;
 }
 
 .msg-container {

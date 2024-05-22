@@ -1,5 +1,16 @@
 let userScore = 0;
 let compScore = 0;
+let drawScore = 0;
+
+const resetBtn = document.querySelector("#reset-btn");
+resetBtn.addEventListener("click", () => {
+  userScore = compScore = drawScore = 0;
+  document.querySelector("#draw-score-val").innerText = drawScore;
+  document.querySelector("#user-score-val").innerText = userScore;
+  document.querySelector("#comp-score-val").innerText = compScore;
+  genMsg("Play Your Move");
+  changeMsgBoxColor("default");
+});
 
 const choices = document.querySelectorAll(".choice-user");
 
@@ -24,20 +35,23 @@ const genMsg = (msg) => {
 
 const drawGame = () => {
   genMsg("Game Draw");
+  drawScore++;
+  document.querySelector("#draw-score-val").innerText = drawScore;
+  changeMsgBoxColor("draw");
 };
 
 const userWins = () => {
   userScore++;
-  console.log("user score: ", userScore);
   document.querySelector("#user-score-val").innerText = userScore;
   genMsg("User Wins!");
+  changeMsgBoxColor("user");
 };
 
 const compWins = () => {
   compScore++;
-  console.log("comp score: ", compScore);
   document.querySelector("#comp-score-val").innerText = compScore;
   genMsg("Computer Wins!");
+  changeMsgBoxColor("comp");
 };
 
 const updateCompChoice = (compChoice) => {
@@ -55,13 +69,23 @@ const updateCompChoice = (compChoice) => {
   }
 };
 
+const changeMsgBoxColor = (event) => {
+  const msgBox = document.getElementById("msg-box");
+  if (event === "user") {
+    msgBox.style.backgroundColor = "#8dd95b";
+  } else if (event === "comp") {
+    msgBox.style.backgroundColor = "#de554b";
+  } else if (event === "draw") {
+    msgBox.style.backgroundColor = "#f0e743";
+  } else {
+    msgBox.style.backgroundColor = "#a9daf5";
+  }
+};
+
 const playGame = (userChoice) => {
-  console.log("user: ", userChoice);
   const compChoice = genCompChoice();
-  console.log("comp: ", compChoice);
   updateCompChoice(compChoice);
   if (userChoice === compChoice) {
-    console.log("Draw");
     drawGame();
   } else if (userChoice === "choice-rock") {
     compChoice === "choice-paper" ? compWins() : userWins();
